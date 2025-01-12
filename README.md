@@ -57,7 +57,7 @@ After the original and engineered data features were extracted, the obtained dat
 
 ### 5) Regression Models
 
-A number of regression models were tested to develop a regression model that could predict the like counts of an Instagram post based on its post-level information combined with profile-level information of the user. The related code and further details for this step can be found in [this](./regression_randomforest.ipynb) and [this]()notebook. 
+A number of regression models were tested to develop a regression model that could predict the like counts of an Instagram post based on its post-level information combined with profile-level information of the user. The related code and further details for this step can be found in [this](./regression_randomforest.ipynb) and [this](./regression_xgboost_output.ipynb) notebook. 
 
 After the data was extracted and prepared for the regression model training, a Random Forest Regression model was trained. Different values for the above parameters were tested for the model training, and the most successful one was determined to be the above combination of parameters for the training dataset. For the evaluation of the model, RMSE (root mean squared error) and R² (R-squared) values were used. Accordingly, the better-performing model was determined based on the presence of a low RMSE with a high R² value. RMSE quantifies how well the Random Forest model is predicting continuous target values. A lower RMSE indicates a better fit to the data. R² indicates how well the regression model explains the variance in the target. It ranges between 0 and 1, 1 indicating a perfect fit. Higher R² values indicate a better model.
 
@@ -144,7 +144,10 @@ Table 4. XGBoost results.
 
 # Contributions
 
-* Sıla:
-* Taha:
-* İlayda:
-* Kemal:
+Taha Çakmak: Focused primarily on feature extraction and data analysis. Specifically investigated which profile-level features would be most effective for classification tasks. His main contribution was designing and implementing a BERT-based neural network for classification, leveraging its advanced contextual understanding of text.
+
+Sıla Horozoğlu: Worked on both regression and classification tasks. For classification, primarily explored classical approaches, including TF-IDF and Word2Vec-based strategies. Her key contribution was training and optimizing an XGBoost model to achieve high performance.
+
+İlayda Kaytaran: Specialized in regression tasks. Implemented and tested various regression models, including Random Forests with TF-IDF vectorisation and other advanced techniques. Her primary contribution involved in-depth post-level feature analysis to enhance the effectiveness of regression models.
+
+Kemal Mutluergil: Worked on both regression and classification tasks, experimenting with different methodologies such as Bayesian Classifier and SVM-based strategies. His efforts contributed to evaluating and improving regression performance through diverse approaches.
