@@ -69,6 +69,79 @@ Another model was trained using XGBoost (Extreme Gradient Boosting) algorithm fo
 
 The correlation analysis run before the classification models were trained was obtained as in Figure 1:
 
+![Figure 1](images/fig1.png)
+
+Figure 1. Correlation matrix for numerical features selected by feature analysis.
+
+The matrix showed that some of the features have moderate correlations between each other, for example the feature "is_business_account" showed a positive correlation with "should_show_category" (0.16) and "should_show_public_contacts" (0.24), suggesting that business accounts tend to enable these settings. The matrix overall suggested weak correlations among most features, highlighting a lack of strong linear relationships in the data. 
+
+The mutual information calculated for each of the numerical features from Figure 1 and the profile labels was obtained as in Table 1:
+
+![Table 1](images/t1.png)
+
+Based on the determined threshold of 0.028, it was seen that the features ‘follower_count’, ‘following_count’, ‘is_verified’, ‘highlight_reel_count', and ‘is_business_account’ had meaningful relationships with the profile labels. Features like ‘has_clips’ and ‘hide_like_and_view_counts’ scored 0, suggesting no dependency and were excluded from further analysis. This approach ensured only the most informative features were considered, improving the efficiency of the model.
+
+### 2) Classification Models
+
+Among the numerous models trained for the classification task, the following accuracy levels were obtained as in Table 2:
+
+![Table 2](images/t2.png)
+
+Table 2: Accuracy scores of different classification models.
+
+The Word2Vec + Random Forest model achieved the lowest accuracy (0.51), likely due to its reliance on averaging word embeddings, which may have lost contextual information. The Bayesian Classifier slightly improved the performance to 0.57, but its inability to effectively model the variability in captions across labels limited its success. The TF-IDF + Random Forest model performed better, achieving an accuracy of 0.60, as it focused on the most informative terms, though it lacked semantic understanding. The Logistic Regression model further improved accuracy to 0.65, benefiting from its linear approach and tuned hyperparameters. Finally, the Turkish BERT model achieved the highest accuracy (0.72) by leveraging contextual embeddings and its ability to capture semantic relationships, though it required significant computational resources and careful fine-tuning. These results demonstrate that contextual and semantic features, as captured by BERT, are critical for the task, despite the computational overhead.
+
+The classification report of Turkish BERT Classifier was obtained as in Table 3:
+
+![Table 3](images/t3.png)
+
+Table 3. Classification report of Turkish BERT Classifier model.
+
+As seen from Table 3, Categories like gaming (precision: 1.00, recall: 0.80) and food (precision: 0.87, recall: 0.89) performed exceptionally well, indicating that the model effectively captured the contextual features of these labels. In contrast, categories such as art and entertainment had lower precision and recall scores, reflecting challenges in distinguishing these categories, likely due to overlapping features or insufficient training data. The macro average F1-score of 0.71 shows relatively balanced performance across all categories, while the weighted average F1-score of 0.72 indicates that the model performed better in categories with more support (e.g., health and lifestyle). 
+
+### 3) Feature Analysis for Regression
+
+The distributions of numerical features included for regression model training were obtained as in Figure 2.
+
+![Figure 2](images/fig2.png)
+
+Figure 2. The distributions of different numerical features included in regression modeling.
+
+The obtained distribution plots from Figure 2 showed that all numerical attributes had a very uneven distribution. In order to reduce the effect of this unevenness, the data was log-transformed in the data processing step, so that the model can handle the heavy tailed distributions.
+
+Similarly, the distributions of numerical engineered features included for regression model training were obtained as in Figure 3.
+
+![Figure 3](images/fig3.png)
+
+Figure 3. The distributions of different engineered numerical features included in regression modeling.
+
+Similarly, these features also had very uneven distribution. Therefore, they were log-transformed to reduce their effect on model training.
+
+### 4) Regression Models
+
+Among the different Random Forest Regressors with different hyperparameters, the best combination of parameters were obtained to be as follows:
+
+- n_estimators: The number of trees in the forest is 100.
+- max_depth: The maximum depth of the tree is 10.
+- min_samples_split: The minimum number of samples required to split an internal node is 5.
+- min_samples_leaf: The minimum number of samples required to be at a leaf node is 4.
+
+These hyperparameters improved the Random Forest Regressor by balancing model complexity and generalization. Limiting the tree depth to 10 (max_depth) and requiring a minimum of 5 samples to split (min_samples_split) and 4 samples per leaf node (min_samples_leaf) prevented overfitting by avoiding overly complex trees that capture noise. At the same time, using 100 trees (n_estimators) ensured robust predictions by averaging outputs from multiple trees, reducing variance. Additionally, text processing used in the caption and the log-transformations included for numerical features improved the model performance further. The final version of the model yielded an R² of 0.80 for both the training and the test set.
+
+  Training RMSE (Original Scale): 30086.19
+  
+  Testing RMSE (Original Scale): 20604.29
+  
+  Training R² (Original Scale): 0.80
+  
+  Testing R² (Original Scale): 0.80
+
+In comparison, the developed XGBoost model performed better than the Random Forest Regressor. A systematic evaluation of XGBoost models with varying hyperparameter values was conducted, and the results were presented in Table 4. As observed from the table, some combinations resulted in very high training scores compared to test scores, indicating potential overfitting. To address this issue, parameters that produced relatively closer scores during training and testing were selected. The chosen parameters were a max_depth of 8, n_estimators of 100, and a learning_rate of 0.1. These parameters yielded an R² of 0.89 for the training set and 0.87 for the test set.
+
+![Table 4](images/t4.png)
+
+Table 4. XGBoost results. 
+
 # Contributions
 
 * Sıla:
