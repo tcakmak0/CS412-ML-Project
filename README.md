@@ -146,7 +146,7 @@ Table 4. XGBoost results.
 
 Taha Çakmak: Focused primarily on feature extraction and data analysis. Specifically investigated which profile-level features would be most effective for classification tasks. His main contribution was designing and implementing a BERT-based neural network for classification, leveraging its advanced contextual understanding of text.
 
-Sıla Horozoğlu: Worked on both regression and classification tasks. For classification, primarily explored classical approaches, including TF-IDF and Word2Vec-based strategies. Her key contribution was training and optimizing an XGBoost model to achieve high performance.
+Sıla Horozoğlu: Worked on both regression and classification tasks. For classification, primarily explored logistic regression with TF-IDF and Word2Vec-based strategies. Her key contribution was training and optimizing an XGBoost model to achieve high performance.
 
 İlayda Kaytaran: Specialized in regression tasks. Implemented and tested various regression models, including Random Forests with TF-IDF vectorisation and other advanced techniques. Her primary contribution involved in-depth post-level feature analysis to enhance the effectiveness of regression models.
 
